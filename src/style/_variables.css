@@ -1,0 +1,40 @@
+
+:root {
+  /* Design unit */
+  --base-design-unit: 8px;
+
+  /* Colors */
+
+  /* Colors - Basic foreground */
+  --color-black: rgba(0, 0, 0, 1);
+  --color-black-8: rgba(0, 0, 0, .8);
+  --color-black-3: rgba(0, 0, 0, .3);
+  --color-white: rgba(255, 255, 255, 1);
+  --color-white-8: rgba(255, 255, 255, .8);
+  --color-white-4: rgba(255, 255, 255, .4);
+
+  /* Colors - Accent */
+  --color-blue: #18A0FB;
+  --color-purple: #7B61FF;
+  --color-hot-pink: #F531B3;
+  --color-green: #1BC47D;
+  --color-red: #F24822;
+  --color-yellow: #FFEB00;
+
+  /* Colors - Special */
+  --color-blue-3: rgba(24, 145, 251, .3);
+  --color-selection-a: #DAEBF7;
+  --color-selection-b: #EDF5FA;
+  --color-black-1: rgba(0, 0, 0, 0.1);
+  --color-hover-fill: rgba(0, 0, 0, 0.06);
+  --color-purple-4: rgba(123, 97, 255, 0.4);
+  --color-white-2: rgba(255, 255, 255, .2);
+
+  /* Colors - Background */
+  --color-bg-white: #FFFFFF;
+  --color-bg-grey-f0: #F0F0F0;
+  --color-bg-silver: #E5E5E5;
+  --color-bg-black: #000000;
+  --color-bg-hud: #222222;
+  --color-bg-toolbar: #2C2C2C;
+}
