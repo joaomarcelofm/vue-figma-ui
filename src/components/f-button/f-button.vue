@@ -1,29 +1,25 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 import { Variant } from "./types";
 
-const props = defineProps({
-  destructive: {
-    type: Boolean,
-    default: false,
-  },
-  fullWidth: {
-    type: Boolean,
-    default: false,
-  },
-  icon: {
-    type: String,
-  },
-  variant: {
-    type: String,
-    default: Variant.standard,
-  },
+const props = withDefaults(defineProps<{
+  danger: boolean;
+  fullWidth: boolean;
+  icon: string;
+  variant: Variant;
+  disabled: boolean;
+}>(), {
+  danger: false,
+  fullWidth: false,
+  icon: "",
+  variant: Variant.standard,
+  disabled: false,
 });
 
 const classes = computed(() => {
   return {
     "f-button": true,
-    "f-button--destructive": props.destructive,
+    "f-button--danger": props.danger,
     "f-button--full-width": props.fullWidth,
     "f-button--primary": props.variant === Variant.primary,
     "f-button--standard": props.variant === Variant.standard,
@@ -32,7 +28,7 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <button :class="classes" :disabled="$attrs.disabled">
+  <button :class="classes" :disabled="disabled">
     <slot />
   </button>
 </template>
@@ -40,26 +36,29 @@ const classes = computed(() => {
 <style lang="scss" scoped>
 .f-button {
   align-items: center;
-  background-color: var(--color-white);
-  border-radius: calc(var(--base-design-unit) * 0.75);
-  border: 1px solid var(--color-black-8);
+  background-color: var(--color-bg);
+  border-radius: var(--radius-medium);
+  border: 1px solid var(--color-border);
   box-sizing: border-box;
-  color: var(--color-black-8);
+  color: var(--color-text);
   display: block;
-  font-size: calc(var(--base-design-unit) * 1.5);
-  font-weight: 500;
-  height: calc(var(--base-design-unit) * 4);
-  gap: var(--base-design-unit);
-  line-height: calc(var(--base-design-unit) * 2);
-  padding: 0 calc(var(--base-design-unit) * 1.5);
+  gap: var(--spacer-2);
+  height: var(--spacer-4);
+  padding: 0 var(--spacer-2);
   text-align: center;
 
+  font-family: var(--text-body-medium-font-family);
+  font-size: var(--text-body-medium-font-size);
+  font-weight: var(--text-body-medium-font-weight);
+  letter-spacing: var(--text-body-medium-letter-spacing);
+  line-height: var(--text-body-medium-line-height);
+
   &:disabled {
-    color: var(--color-black-3);
-    border: 1px solid var(--color-black-3);
+    color: var(--color-text-disabled);
+    border: 1px solid var(--color-border-disabled);
 
     &:active {
-      background-color: var(--color-white);
+      background-color: var(--color-bg);
     }
   }
 
@@ -68,70 +67,71 @@ const classes = computed(() => {
   }
 
   &--standard {
-    &:focus {
-      padding: 0 calc(var(--base-design-unit) * 1.5 - 1px);
-      border: 2px solid var(--color-blue);
-    }
-
     &:active {
-      background-color: var(--color-bg-grey-f0);
+      background-color: var(--color-bghovertransparent);
     }
 
-    &.f-button--destructive {
-      color: var(--color-red);
-      border: 1px solid var(--color-red);
+    &.f-button--danger {
+      color: var(--color-text-danger);
+      border: 1px solid var(--color-border-danger);
 
-      &:focus {
-        padding: 0 calc(var(--base-design-unit) * 1.5 - 1px);
-        border: 2px solid var(--color-red);
+      &:active {
+        background-color: var(--color-bghovertransparent);
       }
 
       &:disabled {
-        color: var(--color-black-3);
-        border: 1px solid var(--color-black-3);
+        color: var(--color-text-disabled);
+        border: 1px solid var(--color-border-disabled);
 
         &:active {
-          background-color: var(--color-white);
+          background-color: var(--color-bg);
         }
       }
     }
   }
 
   &--primary {
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    border: 2px solid var(--color-blue);
+    background-color: var(--color-bg-brand);
+    border: 1px solid var(--color-bg-brand);
+    color: var(--color-text-onbrand);
+    height: var(--spacer-5);
 
-    &:focus {
-      border: 2px solid var(--color-black-3);
+    &:active {
+      background-color: var(--color-bg-brand-pressed);
+      border: 1px solid var(--color-bg-brand-pressed);
+    }
+
+    :hover {
+      background-color: var(--color-bg-brand-hover);
     }
 
     &:disabled {
-      color: var(--color-white);
-      background-color: var(--color-black-3);
-      border: 2px solid transparent;
+      background-color: var(--color-bg-disabled);
+      border: 1px solid var(--color-border-disabled);
+      color: var(--color-text-ondisabled);
 
       &:active {
-        background-color: var(--color-black-3);
+        background-color: var(--color-bg-disabled);
       }
     }
 
-    &.f-button--destructive {
-      background-color: var(--color-red);
-      border: 2px solid var(--color-red);
-      color: var(--color-white);
+    &.f-button--danger {
+      background-color: var(--color-bg-danger);
+      border: 1px solid var(--color-bg-danger);
+      color: var(--color-text-ondanger);
 
-      &:focus {
-        border: 2px solid var(--color-black-3);
+      &:active {
+        background-color: var(--color-bg-danger-pressed);
+        border: 1px solid var(--color-bg-danger-pressed);
       }
 
       &:disabled {
-        color: var(--color-white);
-        background-color: var(--color-black-3);
-        border: 2px solid transparent;
+        color: var(--color-text-ondisabled);
+        border: 1px solid var(--color-border-disabled);
+        background-color: var(--color-bg-disabled);
 
         &:active {
-          background-color: var(--color-black-3);
+          background-color: var(--color-bg-disabled);
         }
       }
     }

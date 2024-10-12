@@ -33,4 +33,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Typography variables */
+  --text-body-medium-font-family: var(--font-family-default);
+  --text-body-medium-font-size: .6875rem;
+  --text-body-medium-font-weight: var(--font-weight-default);
+  --text-body-medium-letter-spacing: .00344rem;
+  --text-body-medium-line-height: 1rem;
+  --text-body-medium-strong-font-family: var(--font-family-default);
+  --text-body-medium-strong-font-size: .6875rem;
+  --text-body-medium-strong-font-weight: var(--font-weight-strong);
+  --text-body-medium-strong-letter-spacing: .00344rem;
+  --text-body-medium-strong-line-height: 1rem;
 }

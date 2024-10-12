@@ -1,14 +1,17 @@
-<script setup>
-import { computed } from "vue";
-
-const props = defineProps({
-  icon: {
-    type: String,
-  },
-  placeholder: {
-    type: String,
-  },
+<script setup lang="ts">
+withDefaults(defineProps<{
+  icon: string;
+  placeholder: string;
+  disabled: boolean;
+}>(), {
+  icon: "",
+  placeholder: "",
+  disabled: false,
 });
+
+defineEmits<{
+  (name: "update:modelValue", value: string): void;
+}>();
 </script>
 
 <template>
@@ -16,10 +19,10 @@ const props = defineProps({
     <label for=""></label>
     <input
       class="f-input__field"
-      :disabled="$attrs.disabled"
+      :disabled="disabled"
       :placeholder="placeholder"
       :value="$attrs.modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
   </div>
 </template>
@@ -27,47 +30,44 @@ const props = defineProps({
 <style lang="scss" scoped>
 .f-input {
   &__field {
-    background-color: var(--color-white);
-    border-radius: calc(var(--base-design-unit) * 0.25);
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-medium);
     border: 1px solid transparent;
     box-sizing: border-box;
-    color: var(--color-black-8);
+    color: var(--color-text);
     display: flex;
-    font-size: calc(var(--base-design-unit) * 1.5);
-    height: calc(var(--base-design-unit) * 3.5);
-    line-height: calc(var(--base-design-unit) * 2);
-    padding: calc(var(--base-design-unit) * 0.75);
+    font-family: var(--text-body-medium-font-family);
+    font-size: var(--text-body-medium-font-size);
+    font-weight: var(--text-body-medium-font-weight);
+    height: var(--spacer-4);
+    letter-spacing: var(--text-body-medium-letter-spacing);
+    line-height: var(--text-body-medium-line-height);
+    padding: var(--spacer-1);
 
     &::placeholder {
-      color: var(--color-black-3);
+      color: var(--color-text-disabled);
     }
 
     &:hover {
-      border: 1px solid var(--color-black-3);
-      border-radius: calc(var(--base-design-unit) * 0.25);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-medium);
     }
 
     &:disabled {
-      color: var(--color-black-3);
+      color: var(--color-text-disabled);
+      border: 1px solid var(--color-bg-secondary);
 
       &:hover {
-        border: 1px solid transparent;
-      }
-
-      &:focus,
-      &:active {
-        border: 2px solid transparent;
+        border: 1px solid var(--color-bg-secondary);
       }
     }
 
     &:focus,
     &:active,
     &:focus-visible {
-      border: 2px solid var(--color-blue);
-      border-radius: calc(var(--base-design-unit) * 0.25);
-      padding: calc(var(--base-design-unit) * 0.75 - 1px)
-        calc(var(--base-design-unit) * 0.75 - 1px);
-      outline: none;
+      border: 1px solid var(--color-border-selected);
+      border-radius: var(--radius-medium);
+      outline: unset;
     }
   }
 }
