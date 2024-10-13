@@ -1,34 +1,40 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { Variant } from "./types";
+import { Variant } from "./f-button.ts";
+import FIcon from "../f-icon/f-icon.vue";
+import { FIconSize } from "../f-icon/f-icon";
 
 const props = withDefaults(defineProps<{
-  danger: boolean;
-  fullWidth: boolean;
-  icon: string;
-  variant: Variant;
-  disabled: boolean;
+  danger?: boolean;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  iconName?: string;
+  large?: boolean;
+  variant?: Variant;
 }>(), {
   danger: false,
-  fullWidth: false,
-  icon: "",
-  variant: Variant.standard,
   disabled: false,
+  fullWidth: false,
+  iconName: "",
+  large: false,
+  variant: Variant.standard,
 });
 
 const classes = computed(() => {
   return {
-    "f-button": true,
     "f-button--danger": props.danger,
     "f-button--full-width": props.fullWidth,
+    "f-button--large": props.large,
     "f-button--primary": props.variant === Variant.primary,
     "f-button--standard": props.variant === Variant.standard,
+    "f-button": true,
   };
 });
 </script>
 
 <template>
   <button :class="classes" :disabled="disabled">
+    <FIcon v-if="iconName" :name="iconName" :size="props.variant === Variant.standard ? FIconSize.small : FIconSize.medium" />
     <slot />
   </button>
 </template>
@@ -41,9 +47,10 @@ const classes = computed(() => {
   border: 1px solid var(--color-border);
   box-sizing: border-box;
   color: var(--color-text);
-  display: block;
-  gap: var(--spacer-2);
+  display: flex;
+  gap: var(--spacer-1);
   height: var(--spacer-4);
+  justify-content: center;
   padding: 0 var(--spacer-2);
   text-align: center;
 
@@ -60,6 +67,10 @@ const classes = computed(() => {
     &:active {
       background-color: var(--color-bg);
     }
+  }
+
+  &--large {
+    height: var(--spacer-5);
   }
 
   &--full-width {
@@ -94,7 +105,6 @@ const classes = computed(() => {
     background-color: var(--color-bg-brand);
     border: 1px solid var(--color-bg-brand);
     color: var(--color-text-onbrand);
-    height: var(--spacer-5);
 
     &:active {
       background-color: var(--color-bg-brand-pressed);
