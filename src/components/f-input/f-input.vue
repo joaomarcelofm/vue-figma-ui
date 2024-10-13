@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import FIcon from "../f-icon/f-icon.vue";
 import { FIconSize } from '../f-icon/f-icon';
+import { computed } from "vue";
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   iconName?: string;
   placeholder?: string;
   disabled?: boolean;
@@ -15,10 +16,17 @@ withDefaults(defineProps<{
 defineEmits<{
   (name: "update:modelValue", value: string): void;
 }>();
+
+const wrapperClasses = computed(() => {
+  return {
+    "f-input": true,
+    "f-input--disabled": props.disabled,
+  };
+});
 </script>
 
 <template>
-  <div class="f-input">
+  <div :class="wrapperClasses">
     <FIcon v-if="iconName" :name="iconName" :size="FIconSize.small" class="f-input__icon" />
     <input
       class="f-input__field"
@@ -52,11 +60,14 @@ defineEmits<{
     border-radius: var(--radius-medium);
   }
 
-  &:disabled {
+  &.f-input--disabled {
     color: var(--color-text-disabled);
     border: 1px solid var(--color-bg-secondary);
 
-    &:hover {
+    &:focus,
+    &:active,
+    &:focus-visible,
+    &:focus-within {
       border: 1px solid var(--color-bg-secondary);
     }
   }

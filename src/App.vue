@@ -36,7 +36,7 @@ const text = ref("button");
     <h2>Input</h2>
     Value: {{ text }}
     <FInput placeholder="Placeholder" v-model="text" /><br />
-    <FInput placeholder="Placeholder" disabled /><br />
+    <FInput placeholder="Placeholder" disabled v-model="text"  /><br />
     <FInput placeholder="Placeholder" /><br />
     <FInput placeholder="Placeholder" iconName="notice" /><br />
 
