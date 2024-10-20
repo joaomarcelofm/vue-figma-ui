@@ -1,5 +1,5 @@
 <svg width="auto" height="auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8 7L8 9L16 9V7L8 7Z" fill="black" fill-opacity="0.8"/>
-<path d="M7 11L7 13L17 13V11L7 11Z" fill="black" fill-opacity="0.8"/>
-<path d="M9 15L9 17L15 17V15L9 15Z" fill="black" fill-opacity="0.8"/>
+<path d="M8 7L8 9L16 9V7L8 7Z" fill="currentColor" fill-opacity="0.8"/>
+<path d="M7 11L7 13L17 13V11L7 11Z" fill="currentColor" fill-opacity="0.8"/>
+<path d="M9 15L9 17L15 17V15L9 15Z" fill="currentColor" fill-opacity="0.8"/>
 </svg>
